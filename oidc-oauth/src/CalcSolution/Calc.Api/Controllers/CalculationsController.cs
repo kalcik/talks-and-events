@@ -1,5 +1,4 @@
-﻿using System.Security.Claims;
-using Calc.Api.Models;
+﻿using Calc.Api.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -16,6 +15,37 @@ namespace Calc.Api.Controllers
             new OperationResponseModel
             {
                 Result = operationRequestModel.Number1 + operationRequestModel.Number2,
+                OperationRequestedBy = GetUserNameFromContext()
+            };
+
+        [HttpPost]
+        [Route("Sub")]
+        public ActionResult<OperationResponseModel> Subtraction([FromBody] OperationRequestModel operationRequestModel) =>
+            new OperationResponseModel
+            {
+                Result = operationRequestModel.Number1 - operationRequestModel.Number2,
+                OperationRequestedBy = GetUserNameFromContext()
+            };
+        [HttpPost]
+        [Route("Div")]
+        public ActionResult<OperationResponseModel> Division([FromBody] OperationRequestModel operationRequestModel)
+        {
+            if (operationRequestModel.Number2 == 0) { return BadRequest("Division by zero"); }
+
+            return new OperationResponseModel
+            {
+                Result = operationRequestModel.Number1 / operationRequestModel.Number2,
+                OperationRequestedBy = GetUserNameFromContext()
+            };
+        }
+
+        [HttpPost]
+        [Route("Mul")]
+        public ActionResult<OperationResponseModel> Multiplication(
+            [FromBody] OperationRequestModel operationRequestModel) =>
+            new OperationResponseModel
+            {
+                Result = operationRequestModel.Number1 * operationRequestModel.Number2,
                 OperationRequestedBy = GetUserNameFromContext()
             };
 
