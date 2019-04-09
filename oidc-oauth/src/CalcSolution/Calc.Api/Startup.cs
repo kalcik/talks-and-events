@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.IdentityModel.Tokens;
 
 namespace Calc.Api
 {
@@ -26,6 +27,10 @@ namespace Calc.Api
                 {
                     options.Authority = Configuration["OpenIDConnect:Authority"];
                     options.Audience = Configuration["OpenIDConnect:Audience"];
+                    options.TokenValidationParameters = new TokenValidationParameters()
+                    {
+                        NameClaimType = "name"
+                    }; 
                 });
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
