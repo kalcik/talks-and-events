@@ -18,6 +18,13 @@ namespace Calc.Api
         public void ConfigureServices(IServiceCollection services)
         {
             services
+                .AddAuthorization(options =>
+                {
+                    options.AddPolicy(Roles.Basic,
+                        policy => policy.RequireRole(Roles.Basic));
+                    options.AddPolicy(Roles.Advanced,
+                        policy => policy.RequireRole(Roles.Advanced));
+                })
                 .AddAuthentication(options =>
                 {
                     options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;

@@ -1,4 +1,5 @@
-﻿using Calc.Api.Models;
+﻿using System;
+using Calc.Api.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -6,46 +7,72 @@ namespace Calc.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
     public class CalculationsController : ControllerBase
     {
+        [Authorize(Roles = Roles.Basic)]
         [HttpPost]
         [Route("Add")]
-        public ActionResult<OperationResponseModel> Add([FromBody] OperationRequestModel operationRequestModel) =>
+        public ActionResult<OperationResponseModel> Add([FromBody] BasicOperationRequestModel basicOperationRequestModel) =>
             new OperationResponseModel
             {
-                Result = operationRequestModel.Number1 + operationRequestModel.Number2,
+                Result = basicOperationRequestModel.Number1 + basicOperationRequestModel.Number2,
                 OperationRequestedBy = GetUserNameFromContext()
             };
 
+        [Authorize(Roles = Roles.Basic)]
         [HttpPost]
         [Route("Sub")]
-        public ActionResult<OperationResponseModel> Subtraction([FromBody] OperationRequestModel operationRequestModel) =>
+        public ActionResult<OperationResponseModel> Subtraction([FromBody] BasicOperationRequestModel basicOperationRequestModel) =>
             new OperationResponseModel
             {
-                Result = operationRequestModel.Number1 - operationRequestModel.Number2,
+                Result = basicOperationRequestModel.Number1 - basicOperationRequestModel.Number2,
                 OperationRequestedBy = GetUserNameFromContext()
             };
+
+        [Authorize(Roles = Roles.Basic)]
         [HttpPost]
         [Route("Div")]
-        public ActionResult<OperationResponseModel> Division([FromBody] OperationRequestModel operationRequestModel)
+        public ActionResult<OperationResponseModel> Division([FromBody] BasicOperationRequestModel basicOperationRequestModel)
         {
-            if (operationRequestModel.Number2 == 0) { return BadRequest("Division by zero"); }
+            if (basicOperationRequestModel.Number2 == 0) { return BadRequest("Division by zero"); }
 
             return new OperationResponseModel
             {
-                Result = operationRequestModel.Number1 / operationRequestModel.Number2,
+                Result = basicOperationRequestModel.Number1 / basicOperationRequestModel.Number2,
                 OperationRequestedBy = GetUserNameFromContext()
             };
         }
 
+        [Authorize(Roles = Roles.Basic)]
         [HttpPost]
         [Route("Mul")]
         public ActionResult<OperationResponseModel> Multiplication(
-            [FromBody] OperationRequestModel operationRequestModel) =>
+            [FromBody] BasicOperationRequestModel basicOperationRequestModel) =>
             new OperationResponseModel
             {
-                Result = operationRequestModel.Number1 * operationRequestModel.Number2,
+                Result = basicOperationRequestModel.Number1 * basicOperationRequestModel.Number2,
+                OperationRequestedBy = GetUserNameFromContext()
+            };
+
+        [Authorize(Roles = Roles.Advanced)]
+        [HttpPost]
+        [Route("Sqr")]
+        public ActionResult<OperationResponseModel>
+            Square([FromBody] AdvancedOperationRequestModel advancedOperationRequestModel) =>
+            new OperationResponseModel
+            {
+                Result = Math.Sqrt(advancedOperationRequestModel.Number),
+                OperationRequestedBy = GetUserNameFromContext()
+            };
+
+        [Authorize(Roles = Roles.Advanced)]
+        [HttpPost]
+        [Route("Pwr")]
+        public ActionResult<OperationResponseModel>
+            PowerOfTwo([FromBody] AdvancedOperationRequestModel advancedOperationRequestModel) =>
+            new OperationResponseModel
+            {
+                Result = Math.Pow(advancedOperationRequestModel.Number, 2),
                 OperationRequestedBy = GetUserNameFromContext()
             };
 

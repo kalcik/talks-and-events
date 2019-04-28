@@ -1,0 +1,1048 @@
+{
+	"info": {
+		"_postman_id": "273ae74f-2994-42c5-915b-eb0c14b93ae2",
+		"name": "Calc.Api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Azure AD",
+			"item": [
+				{
+					"name": "Client Credential Flow",
+					"item": [
+						{
+							"name": "Get access token by clients credentials flow",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/x-www-form-urlencoded",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "scope",
+											"value": "{{Scope-Default}}"
+										},
+										{
+											"key": "client_id",
+											"value": "{{Client-Id}}"
+										},
+										{
+											"key": "grant_type",
+											"value": "client_credentials"
+										},
+										{
+											"key": "client_secret",
+											"value": "{{Client-Secret}}"
+										}
+									]
+								},
+								"url": {
+									"raw": "https://login.microsoftonline.com/{{Tenant}}/oauth2/v2.0/token",
+									"protocol": "https",
+									"host": [
+										"login",
+										"microsoftonline",
+										"com"
+									],
+									"path": [
+										"{{Tenant}}",
+										"oauth2",
+										"v2.0",
+										"token"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Device Flow",
+					"item": [
+						{
+							"name": "Device Authorization Request",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/x-www-form-urlencoded",
+										"disabled": false
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "client_id",
+											"value": "{{Client-Id}}",
+											"type": "text"
+										},
+										{
+											"key": "scope",
+											"value": "{{Scope}} offline_access openid profile email",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "https://login.microsoftonline.com/{{Tenant}}/oauth2/v2.0/devicecode",
+									"protocol": "https",
+									"host": [
+										"login",
+										"microsoftonline",
+										"com"
+									],
+									"path": [
+										"{{Tenant}}",
+										"oauth2",
+										"v2.0",
+										"devicecode"
+									]
+								},
+								"description": "At this time (4/4/19), the v2.0 endpoint only supports `organizations` or a tenant ID as an authority.  Check the [documentation](https://docs.microsoft.com/azure/active-directory/develop/v2-oauth2-device-code) for updates on when `common` and `consumers` are supported."
+							},
+							"response": [
+								{
+									"name": "Device Authorization Request",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"name": "Content-Type",
+												"value": "application/x-www-form-urlencoded",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "urlencoded",
+											"urlencoded": [
+												{
+													"key": "client_id",
+													"value": "6731de76-14a6-49ae-97bc-6eba6914391e",
+													"type": "text"
+												},
+												{
+													"key": "scope",
+													"value": "user.read offline_access openid profile email",
+													"type": "text"
+												}
+											]
+										},
+										"url": {
+											"raw": "https://login.microsoftonline.com/organizations/oauth2/v2.0/devicecode",
+											"protocol": "https",
+											"host": [
+												"login",
+												"microsoftonline",
+												"com"
+											],
+											"path": [
+												"organizations",
+												"oauth2",
+												"v2.0",
+												"devicecode"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Cache-Control",
+											"value": "no-cache, no-store"
+										},
+										{
+											"key": "Pragma",
+											"value": "no-cache"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Expires",
+											"value": "-1"
+										},
+										{
+											"key": "Strict-Transport-Security",
+											"value": "max-age=31536000; includeSubDomains"
+										},
+										{
+											"key": "X-Content-Type-Options",
+											"value": "nosniff"
+										},
+										{
+											"key": "x-ms-request-id",
+											"value": "6c034320-6df6-4aea-886c-565c81050200"
+										},
+										{
+											"key": "P3P",
+											"value": "CP=\"DSP CUR OTPi IND OTRi ONL FIN\""
+										},
+										{
+											"key": "Set-Cookie",
+											"value": "x-ms-gateway-slice=corp; path=/; secure; HttpOnly"
+										},
+										{
+											"key": "Set-Cookie",
+											"value": "stsservicecookie=ests; path=/; secure; HttpOnly"
+										},
+										{
+											"key": "Date",
+											"value": "Mon, 08 Oct 2018 21:09:42 GMT"
+										},
+										{
+											"key": "Content-Length",
+											"value": "455"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"user_code\": \"FJAUPGYY2\",\n    \"device_code\": \"FAQABAAEAAAC5una0EUFgTIF8ElaxtWjT0hwV1l0PGcZnVV6D6brVwuVuSD3H9QrwM86JXLoNp6B8ManAJOYKykrIwiE1EUMl0xl_uEh7_mRBK-gMqmLE8V0n4HMwTrVIoqr9xsY2sXLOtQTgNreUfYNI-LIiketFY8S1QoYOi-bK2lnUVpl7NiAA\",\n    \"verification_url\": \"https://microsoft.com/devicelogin\",\n    \"expires_in\": \"900\",\n    \"interval\": \"5\",\n    \"message\": \"To sign in, use a web browser to open the page https://microsoft.com/devicelogin and enter the code FJAUPGYY2 to authenticate.\"\n}"
+								}
+							]
+						},
+						{
+							"name": "Device Access Token Request",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/x-www-form-urlencoded"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "grant_type",
+											"value": "urn:ietf:params:oauth:grant-type:device_code",
+											"type": "text"
+										},
+										{
+											"key": "code",
+											"value": "[add device code returned by Device Authorization Request]",
+											"type": "text"
+										},
+										{
+											"key": "client_id",
+											"value": "{{Client-Id}}",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "https://login.microsoftonline.com/organizations/oauth2/v2.0/token",
+									"protocol": "https",
+									"host": [
+										"login",
+										"microsoftonline",
+										"com"
+									],
+									"path": [
+										"organizations",
+										"oauth2",
+										"v2.0",
+										"token"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Succesful response",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/x-www-form-urlencoded"
+											}
+										],
+										"body": {
+											"mode": "urlencoded",
+											"urlencoded": [
+												{
+													"key": "grant_type",
+													"value": "urn:ietf:params:oauth:grant-type:device_code",
+													"type": "text"
+												},
+												{
+													"key": "code",
+													"value": "BAQABAAEAAADCoMpjJXrxTq9VG9te-7FXpBHi0oa93TZY740-QhcafK5JQ9RaFCBlKDRLJZkk1IssvPxywInBsO9peSMuhpoQx1kLs9F5QPoMQ8-Oya5VHpSVkLvCy74egjeRgSm4o5pL_bgVcF7R9c653PxbFGgq28S1V5bQN6WESykjjqWgbiAA",
+													"type": "text"
+												},
+												{
+													"key": "client_id",
+													"value": "6731de76-14a6-49ae-97bc-6eba6914391e",
+													"type": "text"
+												}
+											]
+										},
+										"url": {
+											"raw": "https://login.microsoftonline.com/organizations/oauth2/v2.0/token",
+											"protocol": "https",
+											"host": [
+												"login",
+												"microsoftonline",
+												"com"
+											],
+											"path": [
+												"organizations",
+												"oauth2",
+												"v2.0",
+												"token"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Cache-Control",
+											"value": "no-cache, no-store"
+										},
+										{
+											"key": "Pragma",
+											"value": "no-cache"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Expires",
+											"value": "-1"
+										},
+										{
+											"key": "Strict-Transport-Security",
+											"value": "max-age=31536000; includeSubDomains"
+										},
+										{
+											"key": "X-Content-Type-Options",
+											"value": "nosniff"
+										},
+										{
+											"key": "x-ms-request-id",
+											"value": "0fac09b5-89fc-4e16-b555-9a182fa82600"
+										},
+										{
+											"key": "P3P",
+											"value": "CP=\"DSP CUR OTPi IND OTRi ONL FIN\""
+										},
+										{
+											"key": "Set-Cookie",
+											"value": "fpc=AoyXs_IRnyBApfFwr79NfqpyA0h4AQAAALQiONQOAAAA; expires=Sat, 04-May-2019 16:07:17 GMT; path=/; secure; HttpOnly"
+										},
+										{
+											"key": "Set-Cookie",
+											"value": "x-ms-gateway-slice=prod; path=/; secure; HttpOnly"
+										},
+										{
+											"key": "Set-Cookie",
+											"value": "stsservicecookie=ests; path=/; secure; HttpOnly"
+										},
+										{
+											"key": "Date",
+											"value": "Thu, 04 Apr 2019 16:07:16 GMT"
+										},
+										{
+											"key": "Content-Length",
+											"value": "4014"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"token_type\": \"Bearer\",\n    \"scope\": \"email Mail.Read openid profile User.Read\",\n    \"expires_in\": 3600,\n    \"ext_expires_in\": 3600,\n    \"access_token\": \"eyJ0eXAiOiJKV1QiLCJub25jZSI6IkFRQUJBQUFBQUFEQ29NcGpKWHJ4VHE5Vkc5dGUtN0ZYaVpRSXdmazVzS3VNVkt3dXhLaVQ2WlZDTjhHRGpSVFR5MFdlRGo3MWlaNUt4VEhYWkFzSUpTWXlLeVZLMUxLVXlBYjVjdXBBRzFxNGQ2ZGNKUW1Rb3lBQSIsImFsZyI6IlJTMjU2IiwieDV0IjoiTi1sQzBuLTlEQUxxd2h1SFluSFE2M0dlQ1hjIiwia2lkIjoiTi1sQzBuLTlEQUxxd2h1SFluSFE2M0dlQ1hjIn0.eyJhdWQiOiJodHRwczovL2dyYXBoLm1pY3Jvc29mdC5jb20iLCJpc3MiOiJodHRwczovL3N0cy53aW5kb3dzLm5ldC9mYTE1ZDY5Mi1lOWM3LTQ0NjAtYTc0My0yOWYyOTU2ZmQ0MjkvIiwiaWF0IjoxNTU0MzkzNzM3LCJuYmYiOjE1NTQzOTM3MzcsImV4cCI6MTU1NDM5NzYzNywiYWNjdCI6MCwiYWNyIjoiMSIsImFpbyI6IkFTUUEyLzhMQUFBQTAzMUxudDY2K0luQURwMnllUlAyYk1qNTZZRzJ6YXJ0NWtCWTRTS29ZPSIsImFtciI6WyJwd2QiXSwiYXBwX2Rpc3BsYXluYW1lIjoiNi02LTE4QXBwIiwiYXBwaWQiOiI2ZTc0MTcyYi1iZTU2LTQ4NDMtOWZmNC1lNjZhMzliYjEyZTMiLCJhcHBpZGFjciI6IjAiLCJmYW1pbHlfbmFtZSI6IkFkbWluIiwiZ2l2ZW5fbmFtZSI6IkoiLCJpcGFkZHIiOiIxOTguMTM0Ljk4LjEwIiwibmFtZSI6IkogQWRtaW4iLCJvaWQiOiJlM2ViNjQyYS1mMWExLTRlN2ItYmI0YS1kZjRjNGMyYTJmMTIiLCJwbGF0ZiI6IjE0IiwicHVpZCI6IjEwMDMzRkZGQUE0RERDNUYiLCJzY3AiOiJlbWFpbCBNYWlsLlJlYWQgb3BlbmlkIHByb2ZpbGUgVXNlci5SZWFkIiwic3ViIjoiamE1a2NqeTlLZVY4UUFIOHdzT0FpQUt5V05qY3lSeVJuNFpycHotSy1fTSIsInRpZCI6ImZhMTVkNjkyLWU5YzctNDQ2MC1hNzQzLTI5ZjI5NTZmZDQyOSIsInVuaXF1ZV9uYW1lIjoiYWRtaW5AbXlvcmcuY29tIiwidXBuIjoiYWRtaW5AbXlvcmcuY29tIiwidXRpIjoidFFtc0RfeUpGazYxVlpvWUw2Z21BQSIsInZlciI6IjEuMCIsIndpZHMiOlsiNjJlOTAzOTQtNjlmNS00MjM3LTkxOTAtMDEyMTc3MTQ1ZTEwIl0sInhtc19zdCI6eyJzdWIiOiJlbU52RWc2QmJZU2w3WlBBby1BSUtNN0ZyNENYb1UzT0pib3pNdnpFNllvIn0sInhtc190Y2R0IjoxNDE5OTY0MDk5fQ.ovFQbqiNZ7itbvnKB2-uWvQ_TLOm-_xmnVzOdH5Eph8Xiq9D8FUlKUh7p8WEipk68YF1n-eF4Ioc0tq7tR372GIGrbulSeTMzr1qMXXAWrkoluGsbWrb0et2h7rR_KabQgZrAOnni-gAInWiATOMWMCSFhUmVnBZBgtRT7pElPj3JGaouGAuZDwmCCbr-p76jl8Ty8Hf3ArDoDj0MiGOq-VGF4fSjz0SviAlRMjxaBe1ZD1lAn1a0L9OAQ1pcmp-U9J3-MuCXWZXMXgYFJ42OqpcvGWLyeWHEnkNUVELyzRhbRtKEHFZhF0Kb54RRoijEw\",\n    \"refresh_token\": \"OAQABAAAAAADCoMpjJXrxTq9VG9te-7FXrFdW5F4C2B2RUjpwmTgwLMnO9RLj78_-qwLBCXiI2dkXoeJVoSIMeMvhGHT7hQQhseAA_BvfnfywkQdCuw2KwfGaAq0tEb1yiYbpnHZMNZeRpoB1DboSsQVw_oFANlz63aNHUuK3lGLWBY6t_XvQw8k29yTLNe3AtsVvBzTsKRKl9GQVTbp04-wDzMS7rBjqazzOySOCK{snip}}\",\n    \"id_token\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImtpZCI6Ik4tbEMwbi05REFMcXdodUhZbkhRNjNHZUNYYyJ9.eyJhdWQiOiI2ZTc0MTcyYi1iZTU2LTQ4NDMtOWZmNC1lNjZhMzliYjEyZTMiLCJpc3MiOiJodHRwczovL2xvZ2luLm1pY3Jvc29mdG9ubGluZS5jb20vZmExNWQ2OTItZTljNy00NDYwLWE3NDItMjlmMjk1NmZkNDI5L3YyLjAiLCJpYXQiOjE1NTQzOTM3MzcsIm5iZiI6MTU1NDM5MzczNywiZXhwIjoxNTU0Mzk3NjM3LCJhaW8iOiJBVFFBeS84TEFBQUFjaytjYkk4YnFqcTdtV3dCcmRXV3ROYkd0ZDVOMzdFU09pUW1rU2xOSlJNRGVxekJyakwzZ2F3WW1kanhwMiIsIm5hbWUiOiJKIEFkbWluIiwib2lkIjoiZTNlYjY0MmEtZjFhMS00ZTdiLWJiNGEtZGY0YzRjMmEyZjEyIiwicHJlZmVycmVkX3VzZXJuYW1lIjoiYWRtaW5AbXlvcmcuY29tIiwic3ViIjoiZW1OdkVnNkJiWVNsN1pQQW8tQUlLTTdGcjRDWG9VM09KYm96TXZ6RTZZbyIsInRpZCI6ImZhMTVkNjkyLWU5YzctNDQ2MC1hNzQyLTI5ZjI5NTZmZDQyOSIsInV0aSI6InRRbXNEX3lKRms2MVZab1lMNmdtQUEiLCJ2ZXIiOiIyLjAifQ.VbI6gvru70N1u{snip}\"\n}"
+								},
+								{
+									"name": "authorization_pending error response.  This is expected, because the user has not finished authenticating.  Wait `interval` seconds before reeating the request.  ",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/x-www-form-urlencoded"
+											}
+										],
+										"body": {
+											"mode": "urlencoded",
+											"urlencoded": [
+												{
+													"key": "grant_type",
+													"value": "urn:ietf:params:oauth:grant-type:device_code",
+													"type": "text"
+												},
+												{
+													"key": "code",
+													"value": "BAQABAAEAAADCoMpjJXrxTq9VG9te-7FXpBHi0oa93TZY740-QhcafK5JQ9RaFCBlKDRLJZkk1IssvPxywInBsO9peSMuhpoQx1kLs9F5QPoMQ8-Oya5VHpSVkLvCy74egjeRgSm4o5pL_bgVcF7R9c653PxbFGgq28S1V5bQN6WESykjjqWgbiAA",
+													"type": "text"
+												},
+												{
+													"key": "client_id",
+													"value": "6731de76-14a6-49ae-97bc-6eba6914391e",
+													"type": "text"
+												}
+											]
+										},
+										"url": {
+											"raw": "https://login.microsoftonline.com/organizations/oauth2/v2.0/token",
+											"protocol": "https",
+											"host": [
+												"login",
+												"microsoftonline",
+												"com"
+											],
+											"path": [
+												"organizations",
+												"oauth2",
+												"v2.0",
+												"token"
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Cache-Control",
+											"value": "no-cache, no-store"
+										},
+										{
+											"key": "Pragma",
+											"value": "no-cache"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Expires",
+											"value": "-1"
+										},
+										{
+											"key": "Strict-Transport-Security",
+											"value": "max-age=31536000; includeSubDomains"
+										},
+										{
+											"key": "X-Content-Type-Options",
+											"value": "nosniff"
+										},
+										{
+											"key": "x-ms-request-id",
+											"value": "aff0fcc8-257a-400c-a275-bba4a6a72600"
+										},
+										{
+											"key": "P3P",
+											"value": "CP=\"DSP CUR OTPi IND OTRi ONL FIN\""
+										},
+										{
+											"key": "Set-Cookie",
+											"value": "fpc=AoyXs_IRnyBApfFwr79NfqoOhYJ8AgAAADghONQOAAAA; expires=Sat, 04-May-2019 16:04:58 GMT; path=/; secure; HttpOnly"
+										},
+										{
+											"key": "Set-Cookie",
+											"value": "x-ms-gateway-slice=prod; path=/; secure; HttpOnly"
+										},
+										{
+											"key": "Set-Cookie",
+											"value": "stsservicecookie=ests; path=/; secure; HttpOnly"
+										},
+										{
+											"key": "Date",
+											"value": "Thu, 04 Apr 2019 16:04:57 GMT"
+										},
+										{
+											"key": "Content-Length",
+											"value": "404"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"error\": \"authorization_pending\",\n    \"error_description\": \"AADSTS70016: Pending end-user authorization.\\r\\nTrace ID: aff0fcc8-257a-400c-a275-bba4a6a72600\\r\\nCorrelation ID: f820aa6d-9dd7-4fab-8e68-5521013aea2e\\r\\nTimestamp: 2019-04-04 16:04:58Z\",\n    \"error_codes\": [\n        70016\n    ],\n    \"timestamp\": \"2019-04-04 16:04:58Z\",\n    \"trace_id\": \"aff0fcc8-257a-400c-a275-bba4a6a72600\",\n    \"correlation_id\": \"f820aa6d-9dd7-4fab-8e68-5521013aea2e\"\n}"
+								}
+							]
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Authorization Code Flow (PKCE)",
+					"item": [
+						{
+							"name": "Authorize Request",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "https://login.microsoftonline.com/common/oauth2/v2.0/authorize?client_id={{Client-Id}}&response_type=code&redirect_uri=https://app.getpostman.com/oauth2/callback&response_mode=query&scope={{Scope}} openid offline_access &state=12345&code_challenge_method=S256&code_challenge=XWQ6ZeGMU_UBUcP4ud2nPrIZI9g6VMvcGgFoZnrHt4g",
+									"protocol": "https",
+									"host": [
+										"login",
+										"microsoftonline",
+										"com"
+									],
+									"path": [
+										"common",
+										"oauth2",
+										"v2.0",
+										"authorize"
+									],
+									"query": [
+										{
+											"key": "client_id",
+											"value": "{{Client-Id}}"
+										},
+										{
+											"key": "response_type",
+											"value": "code"
+										},
+										{
+											"key": "redirect_uri",
+											"value": "https://app.getpostman.com/oauth2/callback"
+										},
+										{
+											"key": "response_mode",
+											"value": "query"
+										},
+										{
+											"key": "scope",
+											"value": "{{Scope}} openid offline_access "
+										},
+										{
+											"key": "state",
+											"value": "12345"
+										},
+										{
+											"key": "code_challenge_method",
+											"value": "S256"
+										},
+										{
+											"key": "code_challenge",
+											"value": "XWQ6ZeGMU_UBUcP4ud2nPrIZI9g6VMvcGgFoZnrHt4g"
+										}
+									]
+								},
+								"description": "A sign in request to begin the OAuth 2.0 code flow.  Be sure to copy & paste into a browser! Running this request in Postman will just return you the HTML of our login pages."
+							},
+							"response": []
+						},
+						{
+							"name": "Token Request - Auth Code",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/x-www-url-form-urlencoded"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "client_id",
+											"value": "{{Client-Id}}",
+											"type": "text"
+										},
+										{
+											"key": "scope",
+											"value": "{{Scope}}",
+											"type": "text"
+										},
+										{
+											"key": "redirect_uri",
+											"value": "https://app.getpostman.com/oauth2/callback",
+											"type": "text"
+										},
+										{
+											"key": "grant_type",
+											"value": "authorization_code",
+											"type": "text"
+										},
+										{
+											"key": "client_secret",
+											"value": "{{Client-Secret}}",
+											"type": "text"
+										},
+										{
+											"key": "code",
+											"value": "OAQABAAIAAADCoMpjJXrxTq9VG9te-7FXqR4VmgSTKj1vl7y_Yk9wh3DlQfqwe2E_Rbr6D2ees-9lKG_s54--6j6ye9vU_vJ7RQ6uN7En2ES8TcpzjliG4mSM0QmplpRhjGXvSyneClPyHBZbo3mMZB7yGFE5jIpi30O8wb1RQBxYTZoZ1V5KQdwEFRe_GZapeaaOrYWw3D_yMYRsoQyc4ZHo-QM1GZNgxy9keJMA123Rjp6OLHG_AwVgGB5LXHivai6UQ-BdWYRbqUV_Rxmbb3lfe-xz1chemZYszYBHs2PFjc3z9uxa7YGTGemAMkNQIj3Fd00e2Et8WIL_FaaMd4ev8xsxG4vwm0dnxBafnxIc_27awTBTw7B90uIWWf29wVtZTuJSGtELx2_K05iwPPvpgBQG3EtLRqJsw32uTL6isKgMM9Zs1dyRrBR01-9rgg2aVDDkZ-SgCN6oSY_7H3mEmFFr2zQI7uhd_q9LqiVaPC1q1c5lHdPEXYJqIQ7x_YxjOlTnpXX2A18gtVWHUQ7JDQ26qXepCr2RNWQzSMzmDOa_PfFV0C2SL-AsAD_r26MyHFvwHpSet6t_oMOJqjTv7HG-u7C9f1iPoR3oAXZ01elrwgzzkJdSscI1iV1H9SYSBOd4deu1vkJRb_-FwhJ7_tJ0f9UAlrYm_ZjKpQPPCetlzw4EmmiSIvQj0-9x6A3wlim2uqvS7y_wnE16g_Nd6HZ3NzmUBZFgfirgcIJ1ntmqiknr5UYpg2AjKW_BQ4J-FnTkjP6KKlEWI5P8JN9J0JB4vL6HEtQx-O_kHmI7S0Wm_0KWViAA",
+											"type": "text"
+										},
+										{
+											"key": "code_verifier",
+											"value": "VAWqQLJxsuSZwp6QNkuOMEES7QmZdlxZ",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "https://login.microsoftonline.com/common/oauth2/v2.0/token",
+									"protocol": "https",
+									"host": [
+										"login",
+										"microsoftonline",
+										"com"
+									],
+									"path": [
+										"common",
+										"oauth2",
+										"v2.0",
+										"token"
+									]
+								},
+								"description": "The POST request to exchange an auth code for an access token.  Be sure to replace the code with your own, that you recieved after signing in!"
+							},
+							"response": []
+						}
+					],
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "676f6868-b42f-4443-a894-bbf1367d0a20",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "7c56b5a6-a531-4819-85da-96e0f06580bb",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Get Azure AD discovery endpoint",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://login.microsoftonline.com/{{Tenant}}/v2.0/.well-known/openid-configuration",
+							"protocol": "https",
+							"host": [
+								"login",
+								"microsoftonline",
+								"com"
+							],
+							"path": [
+								"{{Tenant}}",
+								"v2.0",
+								".well-known",
+								"openid-configuration"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "noauth"
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "3e721ca8-6280-44d8-938f-16249660eb2a",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "65150386-dc1a-4816-b327-0f627fa6e75e",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Add numbers",
+			"request": {
+				"auth": {
+					"type": "oauth2",
+					"oauth2": [
+						{
+							"key": "accessToken",
+							"value": "",
+							"type": "string"
+						},
+						{
+							"key": "tokenType",
+							"value": "Bearer",
+							"type": "string"
+						},
+						{
+							"key": "addTokenTo",
+							"value": "header",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"Number1\": \"2\",\n\t\"Number2\": \"2\"\n}"
+				},
+				"url": {
+					"raw": "https://{{Api-Url}}/api/Calculations/Add",
+					"protocol": "https",
+					"host": [
+						"{{Api-Url}}"
+					],
+					"path": [
+						"api",
+						"Calculations",
+						"Add"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Subtract numbers",
+			"request": {
+				"auth": {
+					"type": "oauth2",
+					"oauth2": [
+						{
+							"key": "accessToken",
+							"value": "",
+							"type": "string"
+						},
+						{
+							"key": "tokenType",
+							"value": "Bearer",
+							"type": "string"
+						},
+						{
+							"key": "addTokenTo",
+							"value": "header",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"Number1\": \"4\",\n\t\"Number2\": \"2\"\n}"
+				},
+				"url": {
+					"raw": "https://{{Api-Url}}/api/Calculations/Sub",
+					"protocol": "https",
+					"host": [
+						"{{Api-Url}}"
+					],
+					"path": [
+						"api",
+						"Calculations",
+						"Sub"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Multiply numbers",
+			"request": {
+				"auth": {
+					"type": "oauth2",
+					"oauth2": [
+						{
+							"key": "accessToken",
+							"value": "",
+							"type": "string"
+						},
+						{
+							"key": "tokenType",
+							"value": "Bearer",
+							"type": "string"
+						},
+						{
+							"key": "addTokenTo",
+							"value": "header",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"Number1\": \"2\",\n\t\"Number2\": \"2\"\n}"
+				},
+				"url": {
+					"raw": "https://{{Api-Url}}/api/Calculations/Mul",
+					"protocol": "https",
+					"host": [
+						"{{Api-Url}}"
+					],
+					"path": [
+						"api",
+						"Calculations",
+						"Mul"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Divide numbers",
+			"request": {
+				"auth": {
+					"type": "oauth2",
+					"oauth2": [
+						{
+							"key": "accessToken",
+							"value": "",
+							"type": "string"
+						},
+						{
+							"key": "tokenType",
+							"value": "Bearer",
+							"type": "string"
+						},
+						{
+							"key": "addTokenTo",
+							"value": "header",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"Number1\": \"6\",\n\t\"Number2\": \"3\"\n}"
+				},
+				"url": {
+					"raw": "https://{{Api-Url}}/api/Calculations/Div",
+					"protocol": "https",
+					"host": [
+						"{{Api-Url}}"
+					],
+					"path": [
+						"api",
+						"Calculations",
+						"Div"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Power of two",
+			"request": {
+				"auth": {
+					"type": "oauth2",
+					"oauth2": [
+						{
+							"key": "accessToken",
+							"value": "",
+							"type": "string"
+						},
+						{
+							"key": "tokenType",
+							"value": "Bearer",
+							"type": "string"
+						},
+						{
+							"key": "addTokenTo",
+							"value": "header",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"Number\": \"2\"\n}"
+				},
+				"url": {
+					"raw": "https://{{Api-Url}}/api/Calculations/Pwr",
+					"protocol": "https",
+					"host": [
+						"{{Api-Url}}"
+					],
+					"path": [
+						"api",
+						"Calculations",
+						"Pwr"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Square",
+			"request": {
+				"auth": {
+					"type": "oauth2",
+					"oauth2": [
+						{
+							"key": "accessToken",
+							"value": "",
+							"type": "string"
+						},
+						{
+							"key": "tokenType",
+							"value": "Bearer",
+							"type": "string"
+						},
+						{
+							"key": "addTokenTo",
+							"value": "header",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"Number\": \"4\"\n}"
+				},
+				"url": {
+					"raw": "https://{{Api-Url}}/api/Calculations/Sqr",
+					"protocol": "https",
+					"host": [
+						"{{Api-Url}}"
+					],
+					"path": [
+						"api",
+						"Calculations",
+						"Sqr"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "oauth2",
+		"oauth2": [
+			{
+				"key": "accessToken",
+				"value": "",
+				"type": "string"
+			},
+			{
+				"key": "tokenType",
+				"value": "Bearer",
+				"type": "string"
+			},
+			{
+				"key": "addTokenTo",
+				"value": "header",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "0a32bba9-dd99-4521-8c03-d72bdf8863c7",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "5e2f5cd0-798a-414e-bd0c-ec66226c65b7",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
