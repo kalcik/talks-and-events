@@ -1,0 +1,58 @@
+# @url = https://calc-dev-apiapp.azurewebsites.net
+@url =  https://bof-oms-dev-apim.azure-api.net/calc
+@version = v2
+POST {{url}}/{{version}}/api/Calculations/Add
+Content-Type: application/json
+
+{
+	"Number1": 2.0,
+	"Number2": 2.0
+}
+
+###
+
+POST {{url}}/{{version}}/api/Calculations/Sub
+Content-Type: application/json
+
+{
+	"Number1": 12,
+	"Number2": 4
+}
+
+###
+
+POST {{url}}/{{version}};rev=3/api/Calculations/Div
+Content-Type: application/json
+
+{
+	"Number1": 25,
+	"Number2": 5
+}
+
+###
+
+POST {{url}}/{{version}}/api/Calculations/Sqr
+Ocp-Apim-Subscription-Key: c55cdd9fbfca479aa26e6358803d5d50;product=paid
+Content-Type: application/json
+
+{
+	"Number": 3
+}
+
+###
+
+POST https://prod-25.westeurope.logic.azure.com:443/workflows/e88340077edb4732bfd08b0b3bac359e/triggers/request/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Frequest%2Frun&sv=1.0&sig=t_cNv2ajmL9S8_JpAxYGocg56yW1teIpv-rhcTweBw0
+Content-Type: application/json
+Ocp-Apim-Subscription-Key: 7263965d86bb44da9ebcebb701376d87
+
+{
+	"Number": 6
+}
+
+###
+POST {{url}}/{{version}}/api/Calculations/Pwr
+Content-Type: application/json
+
+{
+	"Number": 6
+}

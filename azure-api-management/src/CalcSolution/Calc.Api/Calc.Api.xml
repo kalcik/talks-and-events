@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Calc.Api</name>
+    </assembly>
+    <members>
+        <member name="M:Calc.Api.Controllers.CalculationsController.Add(Calc.Api.Models.BasicOperationRequestModel)">
+            <summary>
+            Calculate addition of two numbers.
+            </summary>
+        </member>
+        <member name="M:Calc.Api.Controllers.CalculationsController.Subtraction(Calc.Api.Models.BasicOperationRequestModel)">
+            <summary>
+            Calculate subtraction of two numbers.
+            </summary>
+        </member>
+        <member name="M:Calc.Api.Controllers.CalculationsController.Division(Calc.Api.Models.BasicOperationRequestModel)">
+            <summary>
+            Calculate division of two numbers.
+            </summary>
+            <response code="404">Returns when division with zero.</response>  
+        </member>
+        <member name="M:Calc.Api.Controllers.CalculationsController.Multiplication(Calc.Api.Models.BasicOperationRequestModel)">
+            <summary>
+            Calculate multiplication of two numbers.
+            </summary>
+        </member>
+        <member name="M:Calc.Api.Controllers.CalculationsController.Square(Calc.Api.Models.AdvancedOperationRequestModel)">
+            <summary>
+            Calculate value's square.
+            </summary>
+        </member>
+    </members>
+</doc>
